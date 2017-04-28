@@ -1,5 +1,6 @@
 package com.example.xyzreader.ui;
 
+import android.app.ActivityOptions;
 import android.app.LoaderManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -69,6 +70,7 @@ getSupportActionBar().setDisplayShowTitleEnabled(false);
         if (savedInstanceState == null) {
             refresh();
         }
+
     }
 
     private void refresh() {
@@ -125,6 +127,7 @@ getSupportActionBar().setDisplayShowTitleEnabled(false);
         mRecyclerView.setAdapter(null);
     }
 
+
     private class Adapter extends RecyclerView.Adapter<ViewHolder> {
         private Cursor mCursor;
 
@@ -141,14 +144,10 @@ getSupportActionBar().setDisplayShowTitleEnabled(false);
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = getLayoutInflater().inflate(R.layout.list_item_article, parent, false);
-            final ViewHolder vh = new ViewHolder(view);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(Intent.ACTION_VIEW,
-                            ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
-                }
-            });
+
+             final ViewHolder vh = new ViewHolder(view);
+
+
             return vh;
         }
 
@@ -164,7 +163,7 @@ getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
+        public void onBindViewHolder(final ViewHolder holder, int position) {
             mCursor.moveToPosition(position);
             holder.titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
             Date publishedDate = parsePublishedDate();
@@ -187,6 +186,17 @@ getSupportActionBar().setDisplayShowTitleEnabled(false);
                     mCursor.getString(ArticleLoader.Query.THUMB_URL),
                     ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader());
             holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
+            final ViewHolder vholder=holder;
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW,
+                            ItemsContract.Items.buildItemUri(getItemId(vholder.getAdapterPosition())));
+                    Bundle bundle=ActivityOptions.makeSceneTransitionAnimation(ArticleListActivity.this
+                            , holder.thumbnailView, holder.thumbnailView.getTransitionName()).toBundle();
+                    startActivity(intent, bundle);
+                }
+            });
         }
 
         @Override
