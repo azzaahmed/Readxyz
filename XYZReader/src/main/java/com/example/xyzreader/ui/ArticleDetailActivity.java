@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.transition.TransitionInflater;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,8 +50,6 @@ public class ArticleDetailActivity extends ActionBarActivity
 
         getLoaderManager().initLoader(0, null, this);
 
-        getWindow().setSharedElementEnterTransition(TransitionInflater.from(this)
-                .inflateTransition(R.transition.move));
 
         mPagerAdapter = new MyPagerAdapter(getFragmentManager());
         mPager = (ViewPager) findViewById(R.id.pager);
