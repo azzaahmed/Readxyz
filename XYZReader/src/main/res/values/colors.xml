@@ -22,4 +22,26 @@
     <color name="theme_primary_dark">#04561A</color>
     <color name="theme_accent">#04561A</color>
     <color name="ltgray">#ffe0e0e0</color>
+
+    <color name="colorPrimary">#E82125</color>
+
+    <!--<color name="colorPrimaryDark">#D50000</color>-->
+    <color name="colorPrimaryDark">#D50000</color>
+
+
+    <!--<color name="colorPrimary">#D50000</color>-->
+    <!--<color name="colorPrimaryDark">#B71C1C</color>-->
+    <!--&gt;>>>>>> 3b237bf0cdd41107a3b47da9a646474ed3f194f1-->
+    <!--<color name="colorAccent">#FFEB3B</color>-->
+    <color name="colorAccent">#414042</color>
+
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+    <color name="blackColor">#000000</color>
+    <color name="hintColor">#CFD8DC</color>
+    <color name="hintColor2">#F5F5F5</color>
+    <color name="A700">#2962FF</color>
+    <color name="colorGreenDark">#33691E</color>
+    <color name="colorGreen">#7CB342</color>
 </resources>
