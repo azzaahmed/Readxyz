@@ -50,6 +50,7 @@ public class ArticleDetailActivity extends AppCompatActivity
 
         getLoaderManager().initLoader(0, null, this);
 
+        postponeEnterTransition();
 
         mPagerAdapter = new MyPagerAdapter(getFragmentManager());
         mPager = (ViewPager) findViewById(R.id.pager);

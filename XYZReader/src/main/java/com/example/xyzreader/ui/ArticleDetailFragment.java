@@ -251,7 +251,7 @@ public class ArticleDetailFragment extends Fragment implements
                                 mPhotoView.setImageBitmap(imageContainer.getBitmap());
                                 mRootView.findViewById(R.id.meta_bar)
                                         .setBackgroundColor(mMutedColor);
-
+                               getActivity().startPostponedEnterTransition();
                                 updateStatusBar();
                             }
                         }
