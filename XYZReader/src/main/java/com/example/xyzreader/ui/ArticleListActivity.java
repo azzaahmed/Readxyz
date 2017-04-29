@@ -192,6 +192,9 @@ getSupportActionBar().setDisplayShowTitleEnabled(false);
                 public void onClick(View view) {
                     Intent intent = new Intent(Intent.ACTION_VIEW,
                             ItemsContract.Items.buildItemUri(getItemId(vholder.getAdapterPosition())));
+
+                    //setting transition name to be unique for each fragment
+                    holder.thumbnailView.setTransitionName(mCursor.getString(ArticleLoader.Query._ID));
                     Bundle bundle=ActivityOptions.makeSceneTransitionAnimation(ArticleListActivity.this
                             , holder.thumbnailView, holder.thumbnailView.getTransitionName()).toBundle();
                    startActivity(intent, bundle);
