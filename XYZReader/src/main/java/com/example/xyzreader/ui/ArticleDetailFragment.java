@@ -262,7 +262,6 @@ public class ArticleDetailFragment extends Fragment implements
 
                                 ///start transition
                                 scheduleStartPostponedTransition(mPhotoView);
-                             //  getActivity().startPostponedEnterTransition();
                                 updateStatusBar();
                             }
                         }
