@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -257,7 +258,8 @@ public class ArticleDetailFragment extends Fragment implements
                                         .setBackgroundColor(mMutedColor);
 
                                 //start transition
-                               getActivity().startPostponedEnterTransition();
+                                scheduleStartPostponedTransition(mPhotoView);
+                             //  getActivity().startPostponedEnterTransition();
                                 updateStatusBar();
                             }
                         }
@@ -316,4 +318,16 @@ public class ArticleDetailFragment extends Fragment implements
                 : mPhotoView.getHeight() - mScrollY;
     }
 
+    //to make sure transition is postponed to the right time
+    private void scheduleStartPostponedTransition(final View sharedElement) {
+        sharedElement.getViewTreeObserver().addOnPreDrawListener(
+                new ViewTreeObserver.OnPreDrawListener() {
+                    @Override
+                    public boolean onPreDraw() {
+                        sharedElement.getViewTreeObserver().removeOnPreDrawListener(this);
+                        getActivity().startPostponedEnterTransition();
+                        return true;
+                    }
+                });
+    }
 }
