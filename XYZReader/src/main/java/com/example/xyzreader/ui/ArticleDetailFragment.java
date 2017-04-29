@@ -97,7 +97,7 @@ public class ArticleDetailFragment extends Fragment implements
                 R.dimen.detail_card_top_margin);
         setHasOptionsMenu(true);
 
-        //shared transition
+        ///shared transition
         getActivity().getWindow().setSharedElementEnterTransition(TransitionInflater.from(getActivity())
                 .inflateTransition(R.transition.move));
 
@@ -240,10 +240,13 @@ public class ArticleDetailFragment extends Fragment implements
                                 + "</font>"));
 
             }
+
+            //subsequence to avoid delay in rendring the fragment due to the extreme large text we provide
             bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).replaceAll("(\r\n|\n)", "<br />")).subSequence(0,2000));
 
-            ////setting transition name to be unique for each fragment corresponds to the one in the List activity
+            ////setting transition name to be unique for each fragment corresponds to the one in the List activity.
             mPhotoView.setTransitionName(mCursor.getString(ArticleLoader.Query._ID));
+
 
             ImageLoaderHelper.getInstance(getActivity()).getImageLoader()
                     .get(mCursor.getString(ArticleLoader.Query.PHOTO_URL), new ImageLoader.ImageListener() {
@@ -257,7 +260,7 @@ public class ArticleDetailFragment extends Fragment implements
                                 mRootView.findViewById(R.id.meta_bar)
                                         .setBackgroundColor(mMutedColor);
 
-                                //start transition
+                                ///start transition
                                 scheduleStartPostponedTransition(mPhotoView);
                              //  getActivity().startPostponedEnterTransition();
                                 updateStatusBar();
@@ -318,7 +321,7 @@ public class ArticleDetailFragment extends Fragment implements
                 : mPhotoView.getHeight() - mScrollY;
     }
 
-    //to make sure transition is postponed to the right time
+    ///to make sure transition is postponed to the right time
     private void scheduleStartPostponedTransition(final View sharedElement) {
         sharedElement.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
@@ -330,4 +333,6 @@ public class ArticleDetailFragment extends Fragment implements
                     }
                 });
     }
+
+
 }

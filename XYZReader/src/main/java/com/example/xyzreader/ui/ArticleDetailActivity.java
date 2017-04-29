@@ -50,6 +50,7 @@ public class ArticleDetailActivity extends AppCompatActivity
 
         getLoaderManager().initLoader(0, null, this);
 
+        //postpone the transition
         postponeEnterTransition();
 
         mPagerAdapter = new MyPagerAdapter(getFragmentManager());
@@ -74,6 +75,7 @@ public class ArticleDetailActivity extends AppCompatActivity
                     mCursor.moveToPosition(position);
                 }
                 mSelectedItemId = mCursor.getLong(ArticleLoader.Query._ID);
+
                 updateUpButtonPosition();
             }
         });

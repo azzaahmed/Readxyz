@@ -51,6 +51,15 @@ public class ArticleListActivity extends AppCompatActivity implements
     // Most time functions can only handle 1902 - 2037
     private GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2,1,1);
 
+    private Bundle mTmpReenterState;
+    static final String EXTRA_STARTING_ALBUM_POSITION = "extra_starting_item_position";
+    static final String EXTRA_CURRENT_ALBUM_POSITION = "extra_current_item_position";
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +67,8 @@ public class ArticleListActivity extends AppCompatActivity implements
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
-setSupportActionBar(mToolbar);
-getSupportActionBar().setDisplayShowTitleEnabled(false);
+     setSupportActionBar(mToolbar);
+      getSupportActionBar().setDisplayShowTitleEnabled(false);
        // final View toolbarContainerView = findViewById(R.id.toolbar_container);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
@@ -193,7 +202,7 @@ getSupportActionBar().setDisplayShowTitleEnabled(false);
                     Intent intent = new Intent(Intent.ACTION_VIEW,
                             ItemsContract.Items.buildItemUri(getItemId(vholder.getAdapterPosition())));
 
-                    //setting transition name to be unique for each fragment
+                    ///setting transition name to be unique for each fragment
                     holder.thumbnailView.setTransitionName(mCursor.getString(ArticleLoader.Query._ID));
                     Bundle bundle=ActivityOptions.makeSceneTransitionAnimation(ArticleListActivity.this
                             , holder.thumbnailView, holder.thumbnailView.getTransitionName()).toBundle();
