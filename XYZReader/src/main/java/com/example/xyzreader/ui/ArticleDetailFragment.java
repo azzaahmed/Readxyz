@@ -276,8 +276,10 @@ Log.v("azza","bottom "+ view.getBottom()+"s hei "+mScrollView.getHeight()+"scrol
 
             //subsequence to avoid delay in rendring the fragment due to the extreme large text we provide
             if (Build.VERSION.SDK_INT >= 24)
-            bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).replaceAll("(\r\n|\n)", "<br />"),Html.FROM_HTML_MODE_LEGACY).subSequence(0,2000));
-else  bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).replaceAll("(\r\n|\n)", "<br />")).subSequence(0, 2000));
+            bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).replaceAll("(\r\n|\n)", "<br />"),Html.FROM_HTML_MODE_LEGACY));
+            //.subSequence(0,2000));
+else  bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).replaceAll("(\r\n|\n)", "<br />")));
+                    //.subSequence(0, 2000));
 
             ////setting transition name to be unique for each fragment corresponds to the one in the List activity.
             mPhotoView.setTransitionName(mCursor.getString(ArticleLoader.Query._ID));
