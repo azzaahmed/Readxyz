@@ -23,7 +23,7 @@
                 <ImageView
                     android:transitionName="@string/imageTransition"
                     android:id="@+id/photo"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
                     android:layout_width="match_parent"
                     android:layout_height="370dp"
                      />
