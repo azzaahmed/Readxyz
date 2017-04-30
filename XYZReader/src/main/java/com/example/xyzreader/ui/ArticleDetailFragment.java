@@ -69,7 +69,7 @@ public class ArticleDetailFragment extends Fragment implements
     private SimpleDateFormat outputFormat = new SimpleDateFormat();
     // Most time functions can only handle 1902 - 2037
     private GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2,1,1);
-
+    private FloatingActionButton fab;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -132,23 +132,8 @@ public class ArticleDetailFragment extends Fragment implements
             }
         });
 
-        mScrollView = (ObservableScrollView) mRootView.findViewById(R.id.scrollview);
-        mScrollView.setCallbacks(new ObservableScrollView.Callbacks() {
-            @Override
-            public void onScrollChanged() {
-                mScrollY = mScrollView.getScrollY();
-                getActivityCast().onUpButtonFloorChanged(mItemId, ArticleDetailFragment.this);
-                mPhotoContainerView.setTranslationY((int) (mScrollY - mScrollY / PARALLAX_FACTOR));
-                updateStatusBar();
-            }
-        });
 
-        mPhotoView = (ImageView) mRootView.findViewById(R.id.photo);
-        mPhotoContainerView = mRootView.findViewById(R.id.photo_container);
-
-        mStatusBarColorDrawable = new ColorDrawable(0);
-
-        FloatingActionButton fab = (FloatingActionButton) mRootView.findViewById(R.id.share_fab);
+        fab = (FloatingActionButton) mRootView.findViewById(R.id.share_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,6 +143,35 @@ public class ArticleDetailFragment extends Fragment implements
                         .getIntent(), getString(R.string.action_share)));
             }
         });
+
+        mPhotoView = (ImageView) mRootView.findViewById(R.id.photo);
+        mPhotoContainerView = mRootView.findViewById(R.id.photo_container);
+
+        mStatusBarColorDrawable = new ColorDrawable(0);
+
+        mScrollView = (ObservableScrollView) mRootView.findViewById(R.id.scrollview);
+        mScrollView.setCallbacks(new ObservableScrollView.Callbacks() {
+            @Override
+            public void onScrollChanged() {
+                mScrollY = mScrollView.getScrollY();
+                getActivityCast().onUpButtonFloorChanged(mItemId, ArticleDetailFragment.this);
+                mPhotoContainerView.setTranslationY((int) (mScrollY - mScrollY / PARALLAX_FACTOR));
+              int height=  mPhotoView.getHeight();
+                View view =  mScrollView.getChildAt(mScrollView.getChildCount() - 1);
+                int diff = (view.getBottom() - (mScrollView.getHeight() + mScrollView.getScrollY()));
+Log.v("azza","bottom "+ view.getBottom()+"s hei "+mScrollView.getHeight()+"scrol y"+mScrollY);
+                if (mScrollY > height)
+                    fab.hide();
+                if (mScrollY <= height||diff==0)
+                    fab.show();
+
+                updateStatusBar();
+            }
+        });
+
+
+
+
 
         bindViews();
         updateStatusBar();
